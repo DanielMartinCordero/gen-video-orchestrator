@@ -9,7 +9,7 @@ class ComfyBridge:
     def generate_image(self, workflow_data, prompt_text, id_prompt, id_latent):
         """With the prompt, ask Comfy Ui to generate a picture or video"""
 
-        # Diccionary clone
+        # Dictionary clone
         actual_workflow = json.loads(json.dumps(workflow_data))
 
         # Embed values
