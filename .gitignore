@@ -31,3 +31,4 @@ weights/
 # === Security & Config ===
 .env
 config.local.json
+.aider*
