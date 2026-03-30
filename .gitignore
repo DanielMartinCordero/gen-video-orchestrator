@@ -1,0 +1,33 @@
+# === IDE & OS ===
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# === Python & Environments ===
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# === AI & Video Outputs ===
+outputs/
+temp/
+frames/
+*.mp4
+*.mov
+*.avi
+
+# === AI Models & Data ===
+models/
+weights/
+*.ckpt
+*.safetensors
+*.pth
+
+# === Security & Config ===
+.env
+config.local.json
