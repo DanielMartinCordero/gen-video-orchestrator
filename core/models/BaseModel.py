@@ -5,6 +5,6 @@ class BaseModel(ABC):
         self.bridge = bridge  # Constructor
 
     @abstractmethod
-    def generate_content(self, topic):
+    def generate_content(self, topic, workflow_data):
         """Mandatory method that each model has to implement"""
         pass

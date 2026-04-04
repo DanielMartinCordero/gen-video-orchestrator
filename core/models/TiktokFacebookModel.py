@@ -2,7 +2,7 @@ from core.models.BaseModel import BaseModel
 
 class TiktokFacebookModel(BaseModel):
 
-    def generate_content(self, topic):
+    def generate_content(self, topic, workflow_data):
         """
         Specific class to develop short content for TikTok or Facebook
         """
@@ -23,7 +23,7 @@ class TiktokFacebookModel(BaseModel):
         print(f"🚀 [TiktokModel] Enviando orden a Flux vía Bridge...")
 
         return self.bridge.generate_image(
-            workflow_path,
+            workflow_data,
             full_prompt,
             ID_PROMPT,
             ID_LATENT
