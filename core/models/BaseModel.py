@@ -6,5 +6,5 @@ class BaseModel(ABC):
 
     @abstractmethod
     def generate_content(self, topic):
-        """Mandatory model that each model has to implement"""
+        """Mandatory method that each model has to implement"""
         pass
