@@ -1,3 +1,4 @@
+
 import requests
 import json
 import time
@@ -23,7 +24,7 @@ class ComfyBridge:
             # return prompt ID to find it later
             return response.json().get('prompt_id')
         except Exception as e:
-            print(f"❌ [ComfyBridge] Error al conectar: {e}")
+            print(f"[ComfyBridge] Error al conectar: {e}")
             return None
 
     def wait_for_image(self, prompt_id):
