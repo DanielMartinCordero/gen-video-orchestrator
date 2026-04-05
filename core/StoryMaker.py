@@ -15,9 +15,9 @@ class StoryMaker:
         self.model_name = 'gemini-2.5-flash'
 
     def generate_script(self, user_topic):
-        print(f"🧠 [Storyteller] Orquestando guion para: {user_topic}")
+        print(f"[Storyteller] Orquestando guion para: {user_topic}")
 
-        # PROMPT MAESTRO: Estructura profesional y técnica
+        # General prompt
         master_prompt = f"""
         ROLE: Expert Viral Content Creator & Dark Fantasy Scriptwriter.
         TASK: Generate a 12-scene narrative script based on the TOPIC: "{user_topic}".
@@ -51,7 +51,7 @@ class StoryMaker:
                 model='gemini-2.5-flash',
                 contents=master_prompt
             )
-            # Limpieza de seguridad por si la IA añade markdown (```json ...)
+            # Clean if ai add trast-content
             raw_text = response.text.replace('```json', '').replace('```', '').strip()
 
             script = json.loads(raw_text)
