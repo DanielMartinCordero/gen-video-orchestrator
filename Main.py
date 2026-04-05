@@ -1,10 +1,18 @@
 import os
 import json
 import shutil
+
 from core.ComfyBridge import ComfyBridge
+from core.ComfyLauncher import ComfyLauncher
 from core.models.TiktokFacebookModel import TiktokFacebookModel
 
+
 def main():
+    # Turning on ComfyUI
+    if not ComfyLauncher.launch():
+        print("❌ El sistema no pudo arrancar ComfyUI. Abortando...")
+        return
+
     # Harcoded paths
     COMFY_OUTPUT_PATH = r"C:\IA_ComfyUI\ComfyUI_windows_portable\ComfyUI\output"
     LOCAL_OUTPUT_PATH = "output"
@@ -27,7 +35,7 @@ def main():
     app_engine = TiktokFacebookModel(bridge)
 
     # Start image generation
-    tema_prueba = "A deportive car in a cinematographic mountains 8k realistic"
+    tema_prueba = "A dark fantasy knight, glowing blue eyes, rain, hyper-realistic, 8k"
     print(f"--- Iniciando Pipeline para: {tema_prueba} ---")
 
     prompt_id = app_engine.generate_content(tema_prueba, workflow_data)
