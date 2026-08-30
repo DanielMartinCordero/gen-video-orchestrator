@@ -46,9 +46,12 @@ class ComfyBridge:
                     outputs = history[prompt_id]['outputs']
                     for node_id in outputs:
                         if 'images' in outputs[node_id]:
-                            return outputs[node_id]['images'][0]['filename']
+                            filename = outputs[node_id]['images'][0]['filename']
+                            print(f"✅ [ComfyBridge] ComfyUI reporta que terminó. Esperando escritura en disco de: {filename}")
+                            time.sleep(2)  # Damos 2 segundos al disco para guardar
+                            return filename
 
-                # If the process hasnt ended yet, wait 2 seconds before pulling again
+                # If the process hasn't ended yet, wait 2 seconds before pulling again
                 time.sleep(2)
             except Exception as e:
                 print(f"⚠️ [ComfyBridge] Consultando estado... ({e})")
