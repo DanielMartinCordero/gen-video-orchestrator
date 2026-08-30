@@ -19,24 +19,26 @@ class StoryMaker:
         print(f"🧠 [Storyteller] Orquestando guion para: {user_topic}")
 
         # PROMPT MAESTRO: Estructura profesional y técnica
+        # PROMPT MAESTRO: Enfoque Documental y Retención TikTok
         master_prompt = f"""
-        ROLE: Expert Viral Content Creator & Dark Fantasy Scriptwriter.
-        TASK: Generate a {config['num_scenes']}-scene narrative script based on the TOPIC: "{user_topic}".
+        ROLE: Expert Educational Content Creator & Historian for TikTok (like History Channel meets TikTok viral hooks).
+        TASK: Generate a {config['num_scenes']}-scene script based on the TOPIC: "{user_topic}".
         
         ATMOSPHERE AND TONE: {config['emotion']}
         VISUAL STYLE: {config['style']}
         NARRATIVE POV: {config['pov']}
         
-        STORYTELLING RULES:
-        1. HOOK: Scene 1 must present a high-stakes conflict or a mysterious visual.
-        2. TENSION: Scenes 2 to the penultimate must escalate the dark atmosphere or historical drama.
-        3. RESOLUTION: The final scene must provide a cinematic or philosophical closure.
-        4. CONCISION: Narration text must be impactful, short (max 15 words per scene), and IN SPANISH.
+        STORYTELLING RULES (CRITICAL):
+        1. HOOK: Scene 1 MUST start with a shocking, real historical hook (e.g., "¿Sabías que en...", "El dato más aterrador y real sobre...").
+        2. FACTUAL & REAL: Do NOT invent fantasy stories, monsters, or magic. The script must explain REAL historical facts, real dates, and real human behavior related to the topic.
+        3. PACE: Fast-paced, educational, and highly engaging. Designed to prevent scrolling.
+        4. NARRATION: 20-30 words per scene, written in fluid, conversational SPANISH. 
         
         IMAGE GENERATION RULES (Visual Prompts):
-        - Follow the VISUAL STYLE requested exactly.
-        - Composition: Vertical 9:16, medium or close-up shots for TikTok.
-        - Language: Visual prompts MUST be in English for maximum compatibility with Flux.
+        - Style: Gritty historical realism, dark cinematic lighting, highly detailed.
+        - TONE (CRITICAL): Raw, unsettling, and slightly macabre. Do NOT sanitize the past. Show the grim and harsh reality of the era (dirt, despair, eerie medical practices, plague signs).
+        - Composition: Vertical 9:16, medium or close-up shots for TikTok. High contrast.
+        - Language: Visual prompts MUST be in English.
 
         OUTPUT FORMAT:
         You must return ONLY a JSON array of objects. No intro text, no markdown code blocks.
@@ -44,18 +46,19 @@ class StoryMaker:
         [
           {{
             "scene": 1,
-            "narration": "Spanish text for the voiceover",
-            "visual_prompt": "Highly detailed English prompt for the image generator"
+            "narration": "Spanish text for the voiceover...",
+            "visual_prompt": "Highly detailed English prompt for the image generator..."
           }}
         ]
         """
-        print("El prompt general es: "+master_prompt)
 
         try:
             response = self.client.models.generate_content(
                 model= self.model_name,
                 contents=master_prompt
             )
+            print("El prompt general es: "+response.text)
+
             # Limpieza de seguridad por si la IA añade markdown (```json ...)
             raw_text = response.text.replace('```json', '').replace('```', '').strip()
 
