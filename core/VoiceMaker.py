@@ -15,6 +15,8 @@ class VoiceMaker:
         print(f"Generando audio en {output_path}")
         asyncio.run(VoiceMaker.generate_voice(text, output_path))
 
+
+# test
 if __name__ == "__main__":
     print("Iniciando test de VoiceMaker...")
     texto_prueba = "Érase una vez, un pueblo fantasma en las oscuras calles de Alnarrín, un pueblo pequeño a las afueras de Moscú"
