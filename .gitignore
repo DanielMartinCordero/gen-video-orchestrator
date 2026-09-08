@@ -14,10 +14,14 @@ __pycache__/
 .pytest_cache/
 
 # === AI & Video Outputs ===
-outputs/
+output/
 temp/
 frames/
 *.mp4
+*.mp3
+*.png
+*.jpg
+*.wav
 *.mov
 *.avi
 

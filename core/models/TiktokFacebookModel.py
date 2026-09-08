@@ -6,13 +6,13 @@ class TiktokFacebookModel(BaseModel):
         """
         Specific class to develop short content for TikTok or Facebook
         """
-        print(f"🎬 [TiktokModel] Procesando tema: {prompt}")
+        print(f" [TiktokModel] Processing theme: {prompt}")
 
         #IDs from my ComfyUI schema
         ID_PROMPT = "2"
         ID_LATENT = "5"
 
-        print(f"🚀 [TiktokModel] Enviando orden a Flux vía Bridge...")
+        print(f" [TiktokModel] Sending order to flux...")
 
         return self.bridge.generate_image(
             workflow_data,
