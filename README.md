@@ -44,7 +44,9 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
                                   ▼
                       ┌──────────────────────┐
                       │ final_video.mp4 (9:16)│
-                      └──────────────────────┘📁 Repository Structure
+                      └──────────────────────┘
+```
+📁 Repository Structure
 Plaintext
 ├── core/
 │   ├── models/
