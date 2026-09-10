@@ -10,8 +10,8 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
 * **Local Generative Imaging**: Integrates seamlessly with a local ComfyUI instance running the **Flux** diffusion model via API polling.
 * **Subprocess Management**: Automatically boots the local ComfyUI portable environment on startup if it is not already running.
 * **Neural Voice Synthesis**: Generates conversational voiceover tracks using `edge-tts` with custom cadence and pitch modulation.
-* **Dynamic Video Assembly**: Uses `moviepy` to assemble scenes, apply progressive **Ken Burns zoom-in** motion effects, and synchronize audio with visual assets.
-* **Fault-Tolerant Execution**: Built-in exponential retry loops and exception handling to mitigate API rate limits and network latency.
+* **Dynamic Video Assembly**: Uses `moviepy` to assemble scenes, apply progressive **Zoom-in** motion effects, and synchronize audio with visual assets.
+* **Fault-Tolerant Execution**: Built-in exponential retry loops and exceptions, to mitigate API rate limits and network latency in image, audio or text generation.
 
 ---
 
@@ -27,7 +27,7 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
        ┌──────────────────────┐
        │   StoryMaker (LLM)   │  ──► Google Gemini 2.5 Flash API
        └──────────┬───────────┘
-                  │  Outputs Scene JSON (Narrations + Flux Prompts)
+                  │  Outputs Scene JSON (Narrations + Flux Prompts from Google Gemini 2.5 Flash)
                   ├───────────────────────────────┐
                   ▼                               ▼
        ┌──────────────────────┐       ┌──────────────────────┐
@@ -39,7 +39,7 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
                   └───────────────┬───────────────┘
                                   ▼
                       ┌──────────────────────┐
-                      │     VideoEditor      │  ──► Ken Burns Zoom FX + Concatenation
+                      │     VideoEditor      │  ──► Zoom-in FX and Concatenation
                       └──────────┬───────────┘
                                   ▼
                       ┌──────────────────────┐
@@ -55,7 +55,8 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
 ├── core/
 │   ├── models/
 │   │   ├── BaseModel.py           # Abstract base class for model adapters
-│   │   └── TiktokFacebookModel.py # 9:16 vertical aspect ratio configuration
+│   │   ├── TiktokFacebookModel.py # 9:16 vertical aspect ratio configuration
+|   |   └── [Future models].py 
 │   ├── ComfyBridge.py             # HTTP API connector and polling worker for ComfyUI
 │   ├── ComfyLauncher.py           # Subprocess runner for automatic GPU initialization
 │   ├── ContentStrategist.py       # Randomizer for narrative styles, tones, and seeds
