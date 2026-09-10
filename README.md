@@ -19,7 +19,7 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
 
 ```text
        ┌──────────────────────┐
-       │     Main.py          │  ◄── Strategy Selector (Random Seed / Topic)
+       │       Main.py        │  ◄── Strategy Selector (Random Seed / Topic)
        └──────────┬───────────┘
                   │
         [1] Topic & Framing
@@ -46,8 +46,12 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
                       │ final_video.mp4 (9:16)│
                       └──────────────────────┘
 ```
-📁 Repository Structure
-Plaintext
+
+---
+
+## 📁 Repository Structure
+
+```text
 ├── core/
 │   ├── models/
 │   │   ├── BaseModel.py           # Abstract base class for model adapters
@@ -65,57 +69,73 @@ Plaintext
 ├── Main.py                        # Pipeline entry point and orchestrator
 ├── README.md                      # Project documentation
 └── requirements.txt               # Pinned Python package dependencies
-🛠️ Prerequisites
-OS: Windows 10/11 (with CUDA-capable GPU).
+```
 
-Python: 3.10.x or higher.
+---
 
-Hardware: Dedicated NVIDIA GPU with at least 8 GB VRAM (for running Flux locally).
+## 🛠️ Prerequisites
 
-Local Diffusion Engine: ComfyUI portable installed locally.
+* **OS**: Windows 10/11 (with CUDA-capable GPU).
+* **Python**: `3.10.x` or higher.
+* **Hardware**: Dedicated NVIDIA GPU with at least 8 GB VRAM (for running Flux locally).
+* **Local Diffusion Engine**: ComfyUI portable installed locally.
+* **Google Gemini API Key**: Obtainable from Google AI Studio.
 
-Google Gemini API Key: Obtainable from Google AI Studio.
+---
 
-🚀 Installation & Setup
-1. Clone the repository
-Bash
+## 🚀 Installation & Setup
+
+### 1. Clone the repository
+```bash
 git clone <YOUR_REPOSITORY_URL>
 cd AI-Generator
-2. Set up a virtual environment
-Bash
+```
+
+### 2. Set up a virtual environment
+```bash
 python -m venv .venv
-source .venv/Scripts/activate  # On Windows PowerShell: .venv\Scripts\Activate.ps1
-3. Install dependencies
-Bash
+source .venv/Scripts/activate
+```
+
+### 3. Install dependencies
+```bash
 pip install -r requirements.txt
-4. Configure environment variables
-Create a .env file in the root directory:
+```
 
-Fragmento de código
+### 4. Configure environment variables
+Create a `.env` file in the root directory:
+```env
 GEMINI_API_KEY=your_gemini_api_key_here
-5. Update local system paths
-Verify that the paths in Main.py and core/ComfyLauncher.py match your local ComfyUI installation:
+```
 
-Python
+### 5. Update local system paths
+Verify that the paths in `Main.py` and `core/ComfyLauncher.py` match your local ComfyUI installation:
+```python
 # core/ComfyLauncher.py
 BAT_PATH = r"C:\path\to\your\ComfyUI_windows_portable\run_nvidia_gpu.bat"
 
 # Main.py
 COMFY_OUTPUT_PATH = r"C:\path\to\your\ComfyUI_windows_portable\ComfyUI\output"
-💻 Usage
+```
+
+---
+
+## 💻 Usage
+
 Run the main pipeline:
 
-Bash
+```bash
 python Main.py
+```
+
 The system will:
+1. Ping and initialize your local ComfyUI server.
+2. Select a topic and generate a cohesive narrative script.
+3. Concurrently synthesize voiceovers and queue image generation.
+4. Apply Ken Burns camera movements and export the final video to `output/tiktok_documentary.mp4`.
 
-Ping and initialize your local ComfyUI server.
+---
 
-Select a topic and generate a cohesive narrative script.
+## 📄 License
 
-Concurrently synthesize voiceovers and queue image generation.
-
-Apply Ken Burns camera movements and export the final video to output/tiktok_documentary.mp4.
-
-📄 License
 This project is licensed under the MIT License - see the LICENSE file for details.
