@@ -77,7 +77,7 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
 ## 🛠️ Prerequisites
 
 * **OS**: Windows 10/11 (with CUDA-capable GPU).
-* **Python**: `3.10.x` or higher.
+* **Python**: 3.10.x (Tested on 3.10.11)
 * **Hardware**: Dedicated NVIDIA GPU with at least 8 GB VRAM (for running Flux locally).
 * **Local Diffusion Engine**: ComfyUI portable installed locally.
 * **Google Gemini API Key**: Obtainable from Google AI Studio.
