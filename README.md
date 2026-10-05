@@ -141,11 +141,6 @@ The system will:
 
 ---
 
-## Example
-A video developed with this system
-https://github.com/user-attachments/assets/995864cb-af41-45c1-8f7d-c9fae906936f
-
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
