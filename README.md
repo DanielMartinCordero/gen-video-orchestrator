@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/995864cb-af41-45c1-8f7d-c9fae906936f
+
 # Autonomous AI Video Generation Pipeline
 
 An end-to-end, fully automated pipeline in Python designed to generate vertical short-form video content (TikTok, YouTube Shorts, Instagram Reels) from scratch. The system autonomously handles scriptwriting, neural voice synthesis, local generative image rendering, and dynamic video editing.
@@ -137,6 +141,12 @@ The system will:
 
 ---
 
+## Example
+A video developed with this system
+https://github.com/user-attachments/assets/995864cb-af41-45c1-8f7d-c9fae906936f
+
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
