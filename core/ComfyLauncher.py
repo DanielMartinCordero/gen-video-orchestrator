@@ -2,11 +2,13 @@ import subprocess
 import time
 import requests
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class ComfyLauncher:
-   # Path to executable batch file
-   BAT_PATH = r"C:\IA_ComfyUI\ComfyUI_windows_portable\run_nvidia_gpu.bat"
-   URL = "http://127.0.0.1:8188"
+   BAT_PATH = os.getenv("COMFY_BAT_PATH")
+   URL = os.getenv("COMFY_URL", "http://127.0.0.1:8188")
 
    @staticmethod
    def launch():
