@@ -1,8 +1,8 @@
-
+[
 
 https://github.com/user-attachments/assets/995864cb-af41-45c1-8f7d-c9fae906936f
 
-# Autonomous AI Video Generation Pipeline
+# Automated AI Video Generation Pipeline
 
 An end-to-end, fully automated pipeline in Python designed to generate vertical short-form video content (TikTok, YouTube Shorts, Instagram Reels) from scratch. The system autonomously handles scriptwriting, neural voice synthesis, local generative image rendering, and dynamic video editing.
 
@@ -10,7 +10,7 @@ An end-to-end, fully automated pipeline in Python designed to generate vertical 
 
 ## ⚡ Key Features
 
-* **Autonomous Scriptwriting**: Powered by Google's `gemini-2.5-flash` via the official `google-genai` SDK, producing structured, multi-scene documentary scripts with retention-focused hooks.
+* **Automated Scriptwriting**: Powered by Google's `gemini-2.5-flash` via the official `google-genai` SDK, producing structured, multi-scene documentary scripts with retention-focused hooks.
 * **Local Generative Imaging**: Integrates seamlessly with a local ComfyUI instance running the **Flux** diffusion model via API polling.
 * **Subprocess Management**: Automatically boots the local ComfyUI portable environment on startup if it is not already running.
 * **Neural Voice Synthesis**: Generates conversational voiceover tracks using `edge-tts` with custom cadence and pitch modulation.
@@ -145,3 +145,149 @@ The system will:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+](https://github.com/user-attachments/assets/995864cb-af41-45c1-8f7d-c9fae906936f
+
+# Automated AI Video Generation Pipeline
+
+An end-to-end, fully automated pipeline in Python designed to generate vertical short-form video content (TikTok, YouTube Shorts, Instagram Reels) from scratch. The system automatically handles scriptwriting, neural voice synthesis, local generative image rendering, and dynamic video editing.
+
+---
+
+## ⚡ Key Features
+
+* **Automated Scriptwriting**: Powered by Google's `gemini-2.5-flash` via the official `google-genai` SDK, producing structured, multi-scene documentary scripts with retention-focused hooks.
+* **Local Generative Imaging**: Integrates seamlessly with a local ComfyUI instance running the **Flux** diffusion model via API polling.
+* **Subprocess Management**: Automatically boots the local ComfyUI portable environment on startup if it is not already running.
+* **Neural Voice Synthesis**: Generates conversational voiceover tracks using `edge-tts` with custom cadence and pitch modulation.
+* **Dynamic Video Assembly**: Uses `moviepy` to assemble scenes, apply progressive **zoom-in** motion effects, and synchronize audio with visual assets.
+* **Fault-Tolerant Execution**: Built-in exponential retry loops and exceptions, to mitigate API rate limits and network latency in image, audio or text generation.
+
+---
+
+## 🏗️ Architecture & Pipeline Flow
+
+```text
+       ┌──────────────────────┐
+       │       Main.py        │  ◄── Strategy Selector (Random Seed / Topic)
+       └──────────┬───────────┘
+                  │
+        [1] Topic & Framing
+                  ▼
+       ┌──────────────────────┐
+       │   StoryMaker (LLM)   │  ──► Google Gemini 2.5 Flash API
+       └──────────┬───────────┘
+                  │  Outputs Scene JSON (Narrations + Flux Prompts from Google Gemini 2.5 Flash)
+                  ├───────────────────────────────┐
+                  ▼                               ▼
+       ┌──────────────────────┐       ┌──────────────────────┐
+       │  VoiceMaker (Audio)  │       │  ComfyBridge (Images)│
+       └──────────┬───────────┘       └──────────┬───────────┘
+                  │                               │
+        edge-tts (.mp3)                 Local ComfyUI / Flux (.png)
+                  │                               │
+                  └───────────────┬───────────────┘
+                                  ▼
+                      ┌──────────────────────┐
+                      │     VideoEditor      │  ──► Zoom-in FX and Concatenation
+                      └──────────┬───────────┘
+                                 ▼
+                  ┌───────────────────────────────┐
+                  │ tiktok_documentary.mp4 (9:16) │
+                  └───────────────────────────────┘
+```
+
+---
+
+## 📁 Repository Structure
+
+```text
+├── core/
+│   ├── models/
+│   │   ├── BaseModel.py           # Abstract base class for model adapters
+│   │   ├── TiktokFacebookModel.py # 9:16 vertical aspect ratio configuration
+|   |   └── [Future models].py 
+│   ├── ComfyBridge.py             # HTTP API connector and polling worker for ComfyUI
+│   ├── ComfyLauncher.py           # Subprocess runner for automatic GPU initialization
+│   ├── ContentStrategist.py       # Randomizer for narrative styles, tones, and seeds
+│   ├── StoryMaker.py              # Gemini prompt orchestration and JSON extraction
+│   ├── VideoEditor.py             # MoviePy renderer with progressive zoom-in motion
+│   └── VoiceMaker.py              # Async TTS synthesizer (Edge-TTS)
+├── workflows/
+│   └── workflow_flux_api.json     # Exported ComfyUI Flux API schema
+├── output/                        # Ignored directory for intermediate assets & final video
+├── .env.example                   # Template for required environment variables
+├── .gitignore                     # Git rules to exclude cache, environments, and media
+├── Main.py                        # Pipeline entry point and orchestrator
+├── README.md                      # Project documentation
+└── requirements.txt               # Pinned Python package dependencies
+```
+
+---
+
+## 🛠️ Prerequisites
+
+* **OS**: Windows 10/11 (with CUDA-capable GPU).
+* **Python**: 3.10.x (Tested on 3.10.11)
+* **Hardware**: Dedicated NVIDIA GPU with at least 8 GB VRAM (for running Flux locally).
+* **Local Diffusion Engine**: ComfyUI portable installed locally.
+* **Google Gemini API Key**: Obtainable from Google AI Studio.
+
+---
+
+## 🚀 Installation & Setup
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/DanielMartinCordero/gen-video-orchestrator.git
+cd gen-video-orchestrator
+```
+
+### 2. Set up a virtual environment
+```bash
+python -m venv .venv
+source .venv/Scripts/activate
+```
+
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure environment variables
+Copy `.env.example` to `.env` and fill in your values:
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+COMFY_BAT_PATH=C:\path\to\ComfyUI_windows_portable\run_nvidia_gpu.bat
+COMFY_OUTPUT_PATH=C:\path\to\ComfyUI_windows_portable\ComfyUI\output
+COMFY_URL=http://127.0.0.1:8188   # optional
+```
+
+---
+
+## 💻 Usage
+
+Run the main pipeline:
+
+```bash
+python Main.py
+```
+
+The system will:
+1. Ping and initialize your local ComfyUI server.
+2. Select a topic and generate a cohesive narrative script.
+3. Concurrently synthesize voiceovers and queue image generation.
+4. Apply progressive zoom-in effects and export the final video to `output/tiktok_documentary.mp4`.
+
+---
+
+## 🧠 Design Decisions
+
+* **Local ComfyUI + Flux**: image generation runs on local hardware, so there are no per-image API costs.
+* **Model adapters (`core/models/`)**: output format (e.g. 9:16) is isolated behind a base class, so adding another format doesn't touch the pipeline.
+* **Retries with exponential backoff**: used on API and generation calls to handle rate limits and transient failures.
+
+## ⚠️ Limitations
+
+* Windows-only (launcher uses `.bat` and `CREATE_NEW_CONSOLE`) and requires an NVIDIA GPU with 8 GB+ VRAM.
+* Depends on the Gemini API (free tier rate limits apply).
+* No automated tests yet.
